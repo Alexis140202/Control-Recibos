@@ -40,7 +40,7 @@ defineProps<{
                 <PasskeyVerify />
             </div>
 
-            <Form v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }" class="flex flex-col gap-5">
+            <Form v-bind="store.form()" :reset-on-success="['Contraseña']" v-slot="{ errors, processing }" class="flex flex-col gap-5">
                 <div class="grid gap-5">
                     <div class="grid gap-2">
                         <Label class="text-xs font-bold text-slate-900 uppercase tracking-wide">EMAIL</Label>
@@ -78,4 +78,4 @@ body:has(.login-page-container) p {
     color: #1c1917 !important;
     border-radius: 6px;
 }
-</style>
+</style>    
