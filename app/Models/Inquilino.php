@@ -34,6 +34,6 @@ class Inquilino extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'fecha_ingreso' => 'date',
+        'fecha_ingreso' => 'date:Y-m-d',
     ];
 }

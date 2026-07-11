@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquilino;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Inquilino_Controller extends Controller
 {
@@ -49,23 +50,82 @@ class Inquilino_Controller extends Controller
     /**
      * Actualizar un registro.
      */
-    public function update(Request $request, Inquilino $inquilino)
+    public function update(Request $request, Inquilino $inquilinosback)
     {
+
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'telefono' => 'required|string|size:9|unique:inquilino,telefono,' . $inquilino->id,
-            'dni' => 'required|string|max:20|unique:inquilino,dni,' . $inquilino->id,
-            'correo' => 'required|email|unique:inquilino,correo,' . $inquilino->id,
-            'cuota' => 'required',
-            'fecha_ingreso' => 'required|date',
+
+            'name' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:255'
+            ],
+
+
+            'apellido' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:255'
+            ],
+
+
+            'telefono' => [
+                'sometimes',
+                'required',
+                'string',
+                'size:9',
+                Rule::unique('inquilino', 'telefono')
+                    ->ignore($inquilinosback->id)
+            ],
+
+
+            'dni' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('inquilino', 'dni')
+                    ->ignore($inquilinosback->id)
+            ],
+
+
+            'correo' => [
+                'sometimes',
+                'required',
+                'email',
+                Rule::unique('inquilino', 'correo')
+                    ->ignore($inquilinosback->id)
+            ],
+
+
+            'cuota' => [
+                'sometimes',
+                'required'
+            ],
+
+
+            'fecha_ingreso' => [
+                'sometimes',
+                'required',
+                'date'
+            ]
+
         ]);
 
-        $inquilino->update($validated);
+
+
+        $inquilinosback->update($validated);
+
+
 
         return response()->json([
+
             'message' => 'Inquilino actualizado correctamente.',
-            'data' => $inquilino
+
+            'data' => $inquilinosback
+
         ]);
     }
 
