@@ -14,7 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { dashboard, RegistroInquilinos, ControlPagos} from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -25,12 +25,12 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Registro de Inquilinos',
-        href: dashboard(),
+        href: RegistroInquilinos(),
         icon: LayoutGrid,
     },
     {
         title: 'Control de pagos',
-        href: dashboard(),
+        href: ControlPagos(),
         icon: LayoutGrid,
     },
 ];
