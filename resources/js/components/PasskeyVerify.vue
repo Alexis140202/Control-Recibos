@@ -35,3 +35,25 @@ const { verify, isLoading, error, isSupported } = usePasskeyVerify({
 });
 </script>
 
+<template>
+    <div v-if="isSupported">
+        <Button
+            type="button"
+            class="w-full"
+            @click="verify"
+            :disabled="isLoading"
+        >
+            <Spinner v-if="isLoading" class="mr-2" />
+            <KeyRound v-else class="mr-2 h-4 w-4" />
+            {{ isLoading ? (loadingLabel ?? 'Verificando...') : (label ?? 'Continuar con Passkey') }}
+        </Button>
+
+        <InputError :message="error" class="mt-2" />
+
+        <Separator class="my-4" />
+
+        <div class="text-center text-xs text-muted-foreground">
+            {{ separator ?? 'O continúa con tu contraseña' }}
+        </div>
+    </div>
+</template>

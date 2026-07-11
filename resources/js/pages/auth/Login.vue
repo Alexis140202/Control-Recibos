@@ -25,12 +25,13 @@ defineProps<{
 </script>
 
 <template>
+
     <Head title="Log in" />
 
     <div class="login-page-container flex flex-col items-center justify-center p-4">
-        
+
         <div class="login-card w-full max-w-sm bg-[#FDFBF7] p-8 rounded-3xl border border-stone-200 shadow-xl">
-            
+
             <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-700">
                 {{ status }}
             </div>
@@ -40,23 +41,45 @@ defineProps<{
                 <PasskeyVerify />
             </div>
 
-            <Form v-bind="store.form()" :reset-on-success="['Contraseña']" v-slot="{ errors, processing }" class="flex flex-col gap-5">
+            <Form v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }"
+                class="flex flex-col gap-5">
                 <div class="grid gap-5">
                     <div class="grid gap-2">
-                        <Label class="text-xs font-bold text-slate-900 uppercase tracking-wide">EMAIL</Label>
-                        <Input class="bg-white border-stone-300 text-slate-900 placeholder:text-stone-400 rounded-xl" placeholder="nombre@empresa.com" />
+                        <Label for="email" class="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                            EMAIL
+                        </Label>
+
+                        <Input id="email" name="email" type="email" required autofocus autocomplete="email"
+                            class="bg-white border-stone-300 text-slate-900 placeholder:text-stone-400 rounded-xl"
+                            placeholder="nombre@empresa.com" />
+
+                        <InputError :message="errors.email" />
                     </div>
 
                     <div class="grid gap-2">
-                        <div class="flex justify-between">
-                            <Label class="text-xs font-bold text-slate-900 uppercase tracking-wide">PASSWORD</Label>
-                            <TextLink v-if="canResetPassword" :href="request()" class="text-xs text-slate-900 font-bold hover:underline">¿Olvidaste tu clave?</TextLink>
+                        <div class="flex justify-between items-center">
+                            <Label for="password" class="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                                PASSWORD
+                            </Label>
+
+                            <TextLink v-if="canResetPassword" :href="request()"
+                                class="text-xs text-slate-900 font-bold hover:underline">
+                                ¿Olvidaste tu clave?
+                            </TextLink>
                         </div>
-                        <PasswordInput class="bg-white border-stone-300 text-slate-900 placeholder:text-stone-400 rounded-xl" placeholder="••••••••" />
+
+                        <PasswordInput id="password" name="password" required autocomplete="current-password"
+                            class="bg-white border-stone-300 text-slate-900 placeholder:text-stone-400 rounded-xl"
+                            placeholder="••••••••" />
+
+                        <InputError :message="errors.password" />
                     </div>
 
-                    <Button type="submit" class="w-full bg-[#162a4d] text-white rounded-xl py-6 font-bold hover:bg-[#1e3a6a]" :disabled="processing">
-                        <Spinner v-if="processing" class="mr-2" /> Iniciar sesión
+                    <Button type="submit"
+                        class="w-full bg-[#162a4d] text-white rounded-xl py-6 font-bold hover:bg-[#1e3a6a]"
+                        :disabled="processing">
+                        <Spinner v-if="processing" class="mr-2" />
+                        Iniciar sesión
                     </Button>
                 </div>
             </Form>
@@ -74,8 +97,9 @@ body:has(.login-page-container) p {
 
 /* 2. Cambiar el color del recuadro negro "OR CONTINUE" a un tono piedra elegante */
 .login-card .bg-black {
-    background-color: #d6d3d1 !important; /* Tono piedra suave */
+    background-color: #d6d3d1 !important;
+    /* Tono piedra suave */
     color: #1c1917 !important;
     border-radius: 6px;
 }
-</style>    
+</style>
