@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('inquilino', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('credential_id')->unique();
-            $table->json('credential');
-            $table->timestamp('last_used_at')->nullable();
+            $table->string('apellido');
+            $table->string('telefono', 9)->unique();
+            $table->string('dni')->unique();
+            $table->string('correo')->unique();
+            $table->string('cuota');
+            $table->date('fecha_ingreso');
             $table->timestamps();
         });
     }

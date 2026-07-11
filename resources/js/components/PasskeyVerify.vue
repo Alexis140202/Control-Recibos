@@ -48,7 +48,7 @@ const { verify, isLoading, error, isSupported } = usePasskeyVerify({
             {{ isLoading ? (loadingLabel ?? 'Verificando...') : (label ?? 'Continuar con Passkey') }}
         </Button>
 
-        <InputError :message="error" class="mt-2" />
+        <InputError :message="error ?? undefined" class="mt-2" />
 
         <Separator class="my-4" />
 
