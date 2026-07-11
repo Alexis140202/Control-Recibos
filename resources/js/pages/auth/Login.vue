@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
-import PasskeyVerify from '@/components/PasskeyVerify.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
@@ -36,10 +35,7 @@ defineProps<{
                 {{ status }}
             </div>
 
-            <!-- Ajuste del Passkey y el recuadro "OR CONTINUE" -->
-            <div class="mb-6 [&_button]:bg-white [&_button]:border-stone-300 [&_button]:text-slate-900">
-                <PasskeyVerify />
-            </div>
+    
 
             <Form v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }"
                 class="flex flex-col gap-5">
